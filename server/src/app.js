@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 require("./db/db");
 const userRoute = require("./routes/user");
+const noteRoute = require("./routes/note");
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(userRoute);
+app.use(noteRoute);
 
 app.listen(port, () => {
   console.log("server is up and running on http://localhost:" + port);
