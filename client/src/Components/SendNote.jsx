@@ -18,14 +18,11 @@ function SendNote() {
     e.preventDefault();
     const myStorage = window.localStorage;
     const userid = myStorage.getItem("userId");
-    console.log(userid);
     const data = new FormData(e.currentTarget);
-    console.log(data.get("noteto"));
-    console.log(data.get("note").split(":")[0]);
 
     const noteData = {
-      user_id_sent: userid,
-      user_email_received: data.get("noteto"),
+      sent_id: userid,
+      receive_email: data.get("noteto"),
       note_id: data.get("note").split(":")[0],
     };
 
@@ -33,7 +30,6 @@ function SendNote() {
       "http://localhost:4000/send-note",
       noteData
     );
-    console.log(sendNote);
   };
 
   return (
