@@ -27,6 +27,8 @@ Install the dependencies and devDependencies and start the server.
 cd Guest-Note-App
 npm i --dev
 npm run install-dep
+go to server folder
+duplicate dotenv and rename it to '.env'
 npm run dev
 go to localhost:3000
 ```
