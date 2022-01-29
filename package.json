@@ -1,0 +1,28 @@
+{
+  "name": "guest-note-app",
+  "version": "1.0.0",
+  "description": "Guest Note App",
+  "devDependencies":{
+      "nodemon": "^2.0.15",
+      "concurrently": "^7.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && nodemon src/app.js",
+    "client": "cd client && npm start",
+    "install-server-dep": "cd server && npm install",
+    "install-client-dep": "cd client && npm install",
+    "install-dep": "concurrently \"npm run install-server-dep\" \"npm run install-client-dep\"",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moessam/Guest-Note-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moessam/Guest-Note-App/issues"
+  },
+  "homepage": "https://github.com/moessam/Guest-Note-App#readme"
+}
