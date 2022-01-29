@@ -3,7 +3,7 @@ const router = new express.Router();
 const db = require("../db/db");
 const upload = require("../middleware/multer");
 
-router.use("/file", express.static("src/upload/images"));
+router.use("/file", express.static("./client/public"));
 router.post("/add-note", upload.single("file"), (req, res) => {
   const { user_id, title, message, note_type } = req.body;
   const media = `http://localhost:4000/file/${req.file.filename}`;
