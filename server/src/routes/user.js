@@ -3,12 +3,15 @@ const router = new express.Router();
 const db = require("../db/db");
 const upload = require("../middleware/multer");
 
-router.post("/register", (req, res) => {
+router.use("/image", express.static("src/upload/images"));
+
+router.post("/register", upload.single("image"), (req, res) => {
   const { name, email } = req.body;
+  const image = `http://localhost:4000/image/${req.file.filename}`;
 
   const sql = "INSERT INTO user SET ?;";
 
-  db.query(sql, { name, email }, (error, results) => {
+  db.query(sql, { name, email, image }, (error, results) => {
     if (error) throw error;
     console.log("The results is: ", results);
     res.send(results);
@@ -29,40 +32,11 @@ router.post("/login", (req, res) => {
   });
 });
 
-// router.post("/image", upload.single("image"), (req, res) => {
-//   if (!req.file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
-//     res.send({ msg: "Only image files (jpg, jpeg, png) are allowed!" });
-//   } else {
-//     const image = req.file.filename;
-//     console.log(image);
-//     // const id = 1;
-//     const sql = "INSERT INTO image SET ?";
-//     db.query(sql, { image }, (error, result) => {
-//       if (error) {
-//         console.log(error);
-//         res.send({ msg: err });
-//       }
-//       if (result) {
-//         console.log("The solution is: ", result);
-//         res.send({ message: "image uploaded", data: result });
-//       }
-//     });
-//   }
-// });
-
-// router.get("/image", (req, res) => {
-//   const sql = "SELECT * FROM image WHERE id = 6";
-//   db.query(sql, (error, result) => {
-//     if (error) {
-//       console.log(error);
-//       res.send({ msg: error });
-//     }
-//     if (result) {
-//       console.log("The solution is moe: ", result);
-//       console.log(result);
-//       res.send({ image: result[0].image });
-//     }
-//   });
-// });
+router.post("/upload", upload.single("file"), (req, res) => {
+  res.json({
+    success: 1,
+    file_url: `http://localhost:4000/file/${req.file.filename}`,
+  });
+});
 
 module.exports = router;
